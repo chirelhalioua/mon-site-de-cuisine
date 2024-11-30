@@ -1,0 +1,202 @@
+/* assets/styles/global.css */
+
+/* Style général de la navbar */
+.navbar {
+  background-color: #2C3E50;
+  padding: 10px 0; /* Réduire la valeur de padding si nécessaire */
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Liens de navigation */
+.nav-links {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  font-family: 'FarAwayGalaxy', sans-serif;
+  text-decoration: none;
+  color: #fff;
+  margin-left: 30px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #F39C12;
+  transform: translateY(-2px);
+}
+
+.logo {
+  font-family: 'Times New Roman';
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #f39c12;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: auto; /* Cela aligne le hamburger à droite */
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+/* Menu actif sur mobile */
+.nav-links.active {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #000;
+  position: absolute;
+  top: 80px; /* Ajustez cette valeur pour réduire l'espace */
+  left: 0;
+  right: 0;
+  height:100px;
+}
+
+.nav-links li {
+  margin-top: 10px;
+}
+
+.nav-links li a {
+  width: 100%;
+  text-align: left;
+  padding: 10px 20px;
+}
+
+/* Styles pour les écrans mobiles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 0;
+    height:60px;
+   }
+
+  .container {
+    flex-direction: row; /* Aligner le logo et hamburger horizontalement */
+    align-items: center; /* Centrer verticalement */
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    display: none; /* Masquer les liens de navigation par défaut */
+  }
+
+  .hamburger {
+    display: flex; /* Afficher le hamburger */
+    margin-left: 20px; /* Ajouter un peu d'espace à gauche si nécessaire */
+  }
+}
+
+.footer {
+    background-color: #0000009a;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footer-info p,
+  .footer-credits p {
+    font-family: 'FarAwayGalaxy', sans-serif;
+    font-size: 1rem;
+    margin: 10px 0;
+    font-weight: 300;
+  }
+  
+  .footer-info p {
+    font-family: 'FarAwayGalaxy', sans-serif;
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+  
+  .footer-credits p {
+    font-family: 'FarAwayGalaxy', sans-serif;
+    font-size: 1rem;
+    color: #f39c12;
+  }
+  
+  .footer-social {
+    margin-top: 20px;
+  }
+  
+  .social-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 0;
+  }
+  
+  .social-link {
+    font-family: 'FarAwayGalaxy', sans-serif;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 0 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .social-link:hover {
+    color: #ff6347;
+    transform: translateY(-5px);
+  }
+  
+  @media (max-width: 768px) {
+    .footer {
+      padding: 30px 15px;
+    }
+  
+    .footer-info p,
+    .footer-credits p {
+      font-size: 0.9rem;
+    }
+  
+    .footer-social {
+      margin-top: 15px;
+    }
+  
+    .social-links {
+      flex-direction: column;
+    }
+  
+    .social-link {
+      margin: 10px 0;
+    }
+  }
+  
