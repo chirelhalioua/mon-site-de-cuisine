@@ -1,6 +1,6 @@
 # 🍴 Mon Site de Cuisine - Recettes Simples avec 5 Ingrédients
 
-Bienvenue sur **Mon Site de Cuisine**, une plateforme dédiée aux recettes rapides et savoureuses utilisant uniquement 5 ingrédients. Ce projet est développé avec amour en utilisant **Nuxt.js**.
+Bienvenue sur **Mon Site de Cuisine**, une plateforme dédiée aux recettes rapides et savoureuses utilisant uniquement 5 ingrédients. Ce projet est développé en utilisant **Nuxt.js**.
 
 ## 🌟 Fonctionnalités
 
