@@ -13,7 +13,7 @@ Bienvenue sur **Mon Site de Cuisine**, une plateforme dédiée aux recettes rapi
 
 ## 🚀 Démo
 
-Vous pouvez explorer le site [ici](https://github.com/chirelhalioua/mon-site-de-cuisine).
+Vous pouvez explorer le site [ici](https://chirelhalioua.github.io/mon-site-de-cuisine).
 
 ---
 
