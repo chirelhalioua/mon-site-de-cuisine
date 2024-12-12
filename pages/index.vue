@@ -17,7 +17,7 @@
         <div class="recipe-item" v-for="recipe in recipes" :key="recipe.id">
           <h3>{{ recipe.title }}</h3>
           <p>{{ recipe.description }}</p>
-          <nuxt-link :to="`/recettes/${recipe.id}`" class="recipe-link">Voir la recette</nuxt-link>
+          <NuxtLink :to="`/recettes/${recipe.id}`">{{ recipe.title }}</NuxtLink>        
         </div>
       </div>
     </section>
@@ -27,17 +27,14 @@
       <h2>Le concept</h2>
       <div class="concept-steps">
         <div class="step">
-          <img src="C:/Users/chire/cook-project/static/icons/fridge.png" alt="Frigo" class="step-icon" />
           <h3>1. Trouvez vos ingrédients</h3>
           <p>Ouvrez votre frigo ou vos placards et choisissez 5 ingrédients disponibles.</p>
         </div>
         <div class="step">
-          <img src="C:/Users/chire/cook-project/static/icons/cooking.png" alt="Cuisiner" class="step-icon" />
           <h3>2. Suivez nos recettes</h3>
           <p>Découvrez nos recettes rapides et faciles, adaptées à vos 5 ingrédients.</p>
         </div>
         <div class="step">
-          <img src="C:/Users/chire/cook-project/static/icons/plate.png" alt="Déguster" class="step-icon" />
           <h3>3. Dégustez !</h3>
           <p>Préparez des plats délicieux, simples et rapides à partager avec vos proches.</p>
         </div>
@@ -81,7 +78,7 @@ const recipes = ref([
 
 /* Header */
 header {
-  background-image: url("C:/Users/chire/cook-project/static/images/header.png");
+  background-image: url('/mon-site-de-cuisine/images/header.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
