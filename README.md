@@ -1,75 +1,99 @@
-# Nuxt Minimal Starter
+# 🍴 Mon Site de Cuisine - Recettes Simples avec 5 Ingrédients
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Bienvenue sur **Mon Site de Cuisine**, une plateforme dédiée aux recettes rapides et savoureuses utilisant uniquement 5 ingrédients. Ce projet est développé en utilisant **Nuxt.js**.
 
-## Setup
+## 🌟 Fonctionnalités
 
-Make sure to install dependencies:
+- **Recettes Simples** : Découvrez une sélection de recettes délicieuses avec seulement 5 ingrédients.
+- **Navigation Intuitive** : Accédez facilement aux recettes via une interface utilisateur claire et réactive.
+- **Recherche Dynamique** : Parcourez les recettes et obtenez des détails sur chacune.
+- **Design Réactif** : Conçu pour être beau et fonctionnel sur tous les appareils.
 
-```bash
-# npm
-npm install
+---
 
-# pnpm
-pnpm install
+## 🚀 Démo
 
-# yarn
-yarn install
+Vous pouvez explorer le site [ici](https://chirelhalioua.github.io/mon-site-de-cuisine).
 
-# bun
-bun install
+---
+
+## 🛠️ Installation et Utilisation
+
+### Prérequis
+
+- **Node.js** : Version 16 ou supérieure
+- **Git** : Pour cloner le projet
+- **Un navigateur moderne** : Pour tester
+
+### Étapes d'installation
+
+1. Clonez le projet :
+   ```bash
+   git clone https://github.com/chirelhalioua/mon-site-de-cuisine.git
+   cd mon-site-de-cuisine
+   ```
+
+2. Installez les dépendances :
+   ```bash
+   npm install
+   ```
+
+3. Lancez le serveur de développement :
+   ```bash
+   npm run dev
+   ```
+
+4. Ouvrez votre navigateur à l'adresse suivante :  
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## 📂 Structure du Projet
+
+Voici un aperçu des principaux fichiers et dossiers du projet (voir sur la branche master):
+
+```
+mon-site-de-cuisine/
+├── components/          # Composants Vue.js réutilisables (ex : Navbar, Footer)
+├── pages/               # Pages principales du site (ex : recettes, détails recette)
+├── assets/              # Fichiers CSS, images, polices
+├── layouts/             # Layout global du site
+├── public/              # Contenu statique accessible via l'URL
+├── nuxt.config.ts       # Configuration principale du projet Nuxt.js
+└── README.md            # Document explicatif du projet
 ```
 
-## Development Server
+---
 
-Start the development server on `http://localhost:3000`:
+## 🛠️ Technologies Utilisées
 
-```bash
-# npm
-npm run dev
+- **Nuxt.js** : Framework Vue.js pour la création d'applications web performantes.
+- **Font Awesome** : Icônes pour les réseaux sociaux et autres éléments.
+- **SCSS** : Pour une gestion efficace des styles.
 
-# pnpm
-pnpm dev
+---
 
-# yarn
-yarn dev
+## 🤝 Contribution
 
-# bun
-bun run dev
-```
+Les contributions sont les bienvenues !  
+Pour proposer une modification :
 
-## Production
+1. **Forkez** ce dépôt.
+2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/ma-feature`).
+3. Commitez vos modifications (`git commit -m "Ajout d'une nouvelle fonctionnalité"`).
+4. Poussez vers la branche (`git push origin feature/ma-feature`).
+5. Ouvrez une **Pull Request**.
 
-Build the application for production:
+---
 
-```bash
-# npm
-npm run build
+## 📝 Licence
 
-# pnpm
-pnpm build
+Ce projet est sous licence **MIT**. Vous êtes libre de l'utiliser, le modifier et le distribuer tant que vous incluez la licence d'origine.
 
-# yarn
-yarn build
+---
 
-# bun
-bun run build
-```
+## 💡 Remerciements
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Merci d'avoir visité ce projet ! Développé avec 💚 par **Chirel Halioua**.
