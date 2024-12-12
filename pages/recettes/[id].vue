@@ -7,24 +7,23 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { ref, watchEffect } from 'vue'
+import { ref, onMounted } from 'vue'
 
-// Utilisation de la route pour récupérer l'ID de la recette
-const route = useRoute()
-
-// Données fictives pour les recettes
+// Liste des recettes
 const recipes = [
   { id: 1, title: "Salade de quinoa", description: "Une salade fraîche avec du quinoa, des légumes et de l'huile d'olive." },
   { id: 2, title: "Tacos au poulet", description: "Des tacos épicés avec du poulet grillé, des légumes croquants et une sauce maison." },
   { id: 3, title: "Pasta tomate-basilic", description: "Des pâtes fraîches avec une sauce tomate simple et du basilic." }
 ]
 
-// Créez des références réactives pour le titre et la description
+// Variables réactives pour afficher le titre et la description
 const recipeTitle = ref('')
 const recipeDescription = ref('')
 
-// Fonction pour rechercher la recette par ID
-function getRecipeById(id) {
+// Récupérer l'ID de la route et chercher la recette correspondante
+const route = useRoute()
+
+const getRecipeById = (id) => {
   const recipe = recipes.find(r => r.id === id)
   if (recipe) {
     recipeTitle.value = recipe.title
@@ -35,12 +34,15 @@ function getRecipeById(id) {
   }
 }
 
-// Appeler la fonction au montage initial
-getRecipeById(parseInt(route.params.id))
+// Charger la recette à l'initialisation
+onMounted(() => {
+  const recipeId = parseInt(route.params.id)
+  getRecipeById(recipeId)
+})
 
-// Réagir aux changements d'ID dans l'URL
-watchEffect(() => {
-  getRecipeById(parseInt(route.params.id))
+// Mettre à jour les détails si l'ID de la route change
+watch(() => route.params.id, (newId) => {
+  getRecipeById(parseInt(newId))
 })
 </script>
 
