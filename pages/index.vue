@@ -78,7 +78,7 @@ const recipes = ref([
 
 /* Header */
 header {
-  background-image: url('/mon-site-de-cuisine/images/header.png');
+  background-image: url('/mon-site-de-cuisine/blob/master/static/images/header.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
