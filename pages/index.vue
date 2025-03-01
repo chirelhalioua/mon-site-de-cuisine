@@ -1,263 +1,150 @@
 <template>
-  <div class="home">
-    <head>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    </head>
-    
+  <div class="min-h-screen w-full bg-white font-[Playfair_Display]">
     <!-- Header -->
-    <header>
-      <h1>5 ingrédients, 100 saveurs</h1>
-      <p>Découvrez des recettes savoureuses et simples avec seulement 5 ingrédients !</p>
+    <header class="relative py-16 px-6 bg-[#EF9A14]">
+      <div class="max-w-[1200px] mx-auto text-center">
+        <p class="text-[0.9rem] font-[Montserrat] text-white mb-2 tracking-[0.2em]">CUISINE MINIMALISTE</p>
+        <h1 class="text-[3.5rem] max-lg:text-[2.5rem] max-sm:text-[2rem] font-bold text-white leading-[1.1] mb-4">5 ingrédients, 100 saveurs</h1>
+        <p class="text-[1.1rem] max-sm:text-[1rem] text-white font-[Montserrat] font-light max-w-[500px] mx-auto">Découvrez des recettes savoureuses et simples avec seulement 5 ingrédients !</p>
+      </div>
     </header>
 
-    <!-- Recettes populaires -->
-    <section class="featured-recipes">
-      <h2>Recettes populaires</h2>
-      <div class="recipe-list">
-        <div class="recipe-item" v-for="recipe in recipes" :key="recipe.id">
-          <h3>{{ recipe.title }}</h3>
-          <p>{{ recipe.description }}</p>
-          <NuxtLink :to="`/recettes/${recipe.id}`">{{ recipe.title }}</NuxtLink>        
+    <!-- Recettes Section -->
+    <section class="px-6 py-12 bg-white">
+      <div class="max-w-[1200px] mx-auto">
+        <h2 class="text-[2.5rem] text-center font-bold text-[#2c3e50] mb-12">Recettes populaires</h2>
+        <div class="grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-6">
+          <div v-for="recipe in recipes" 
+               :key="recipe.id" 
+               class="bg-white border-[1px] border-[#eee]"
+               :style="{ transform: recipe.hover ? 'translateY(-8px)' : 'none' }"
+               @mouseenter="recipe.hover = true"
+               @mouseleave="recipe.hover = false">
+            <img :src="'https://placehold.co/400x300'" class="w-full h-[200px] object-cover" />
+            <div class="p-6">
+              <p class="text-[#EF9A14] font-[Montserrat] text-[0.8rem] tracking-[0.2em] mb-2">RECETTE DU JOUR</p>
+              <h3 class="text-[1.5rem] font-bold text-[#2c3e50] mb-2 leading-tight">{{ recipe.title }}</h3>
+              <p class="text-[#7f8c8d] text-[0.9rem] mb-4 font-[Montserrat]">{{ recipe.description }}</p>
+              <div class="flex items-center justify-between">
+                <NuxtLink 
+                  :to="`/recettes/${recipe.id}`"
+                  class="text-[#2c3e50] font-[Montserrat] text-[0.8rem] tracking-[0.1em] flex items-center group"
+                  :style="{ color: recipe.hover ? '#EF9A14' : '#2c3e50' }">
+                  <span>LIRE LA RECETTE</span>
+                  <svg 
+                    class="w-4 h-4 ml-2 transition-transform duration-300"
+                    :style="{ transform: recipe.hover ? 'translateX(4px)' : 'none' }"
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Concept -->
-    <section class="concept">
-      <h2>Le concept</h2>
-      <div class="concept-steps">
-        <div class="step">
-          <h3>1. Trouvez vos ingrédients</h3>
-          <p>Ouvrez votre frigo ou vos placards et choisissez 5 ingrédients disponibles.</p>
+    <!-- Concept Section -->
+    <section class="px-6 py-12 bg-[#f8f8f8]">
+      <div class="max-w-[1200px] mx-auto">
+        <div class="text-center mb-10">
+          <p class="text-[#EF9A14] font-[Montserrat] text-[0.8rem] tracking-[0.2em] mb-2">NOTRE PHILOSOPHIE</p>
+          <h2 class="text-[2.5rem] max-sm:text-[2rem] font-bold text-[#2c3e50]">Le concept</h2>
         </div>
-        <div class="step">
-          <h3>2. Suivez nos recettes</h3>
-          <p>Découvrez nos recettes rapides et faciles, adaptées à vos 5 ingrédients.</p>
-        </div>
-        <div class="step">
-          <h3>3. Dégustez !</h3>
-          <p>Préparez des plats délicieux, simples et rapides à partager avec vos proches.</p>
+        <div class="grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-8">
+          <div v-for="(step, index) in steps" 
+               :key="index"
+               class="bg-white p-6"
+               :style="{ transform: step.hover ? 'translateY(-8px)' : 'none' }"
+               @mouseenter="step.hover = true"
+               @mouseleave="step.hover = false">
+            <div class="text-[#EF9A14] font-[Montserrat] font-bold text-[2rem] mb-4">{{ step.title[0] }}</div>
+            <h3 class="text-[1.2rem] font-bold mb-3">{{ step.title }}</h3>
+            <p class="text-[#666] font-[Montserrat] text-[0.9rem] leading-relaxed">{{ step.description }}</p>
+            <div class="w-8 h-[2px] mt-4 transition-all duration-300"
+                 :style="{ 
+                   backgroundColor: step.hover ? '#EF9A14' : '#2c3e50',
+                   width: step.hover ? '32px' : '16px'
+                 }">
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#2c3e50] text-white py-8 px-6">
+      <div class="max-w-[1200px] mx-auto text-center">
+        <p class="font-[Montserrat] text-[0.8rem] tracking-[0.2em] opacity-80">CUISINEZ SIMPLEMENT</p>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue'
 
-// Simuler des recettes avec des données fictives
 const recipes = ref([
   {
     id: 1,
-    title: "Salade de quinoa",
-    description: "Une salade fraîche avec du quinoa, des légumes et de l'huile d'olive.",
+    title: 'Salade de quinoa',
+    description: 'Une salade fraîche avec du quinoa, des légumes et de l\'huile d\'olive',
+    hover: false
   },
   {
     id: 2,
-    title: "Tacos au poulet",
-    description: "Des tacos épicés avec du poulet grillé, des légumes croquants et une sauce maison.",
+    title: 'Tacos au poulet',
+    description: 'Des tacos épicés avec du poulet grillé, des légumes croquants et une sauce maison',
+    hover: false
   },
   {
     id: 3,
-    title: "Pasta tomate-basilic",
-    description: "Des pâtes fraîches avec une sauce tomate simple et du basilic.",
+    title: 'Pasta tomate-basilic',
+    description: 'Des pâtes fraîches avec une sauce tomate simple et du basilic',
+    hover: false
+  }
+])
+
+const steps = ref([
+  {
+    title: '1. Trouvez vos ingrédients',
+    description: 'Ouvrez votre frigo ou vos placards et choisissez 5 ingrédients disponibles.',
+    hover: false
   },
-]);
+  {
+    title: '2. Suivez nos recettes',
+    description: 'Découvrez nos recettes rapides et faciles, adaptées à vos 5 ingrédients.',
+    hover: false
+  },
+  {
+    title: '3. Dégustez !',
+    description: 'Préparez des plats délicieux, simples et rapides à partager avec vos proches.',
+    hover: false
+  }
+])
 </script>
 
-<style scoped>
-/* Style général */
-.home {
-  font-family: "Arial", sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
-  margin: 0;
-  padding: 0;
+<style>
+/* Import des polices */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+/* Transitions globales */
+* {
+  transition: all 0.3s ease;
 }
 
-/* Header */
-header {
-  background-image: url('/mon-site-de-cuisine/blob/master/static/images/header.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 60vh;
-  color: white;
-  padding: 40px 20px;
-  text-align: center;
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-header h1 {
-  font-family: 'Times New Roman';
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-header p {
-  font-family: 'Times New Roman';
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin-top: 10px;
-  color: #ecf0f1;
-}
-
-/* Recettes populaires */
-.featured-recipes {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.featured-recipes h2 {
-  font-family: 'Times New Roman';
-  font-size: 2rem;
-  color: #2c3e50;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.recipe-list {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 30px;
-  flex-wrap: wrap;
-  padding: 0 10px;
-}
-
-.recipe-item {
-  background-color: white;
-  padding: 20px;
-  width: 280px;
-  margin: 10px 0;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
-}
-
-.recipe-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-.recipe-item h3 {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 15px;
-}
-
-.recipe-item p {
-  font-size: 1rem;
-  color: #7f8c8d;
-  margin-bottom: 20px;
-}
-
-.recipe-link {
-  font-family: 'Times New Roman';
-  color: #000;
-  font-weight: bold;
+/* Style pour les liens */
+a {
   text-decoration: none;
 }
 
-.recipe-link:hover {
-  text-decoration: none;
-}
-
-/* Section Concept */
-.concept {
-  background-color: #fff;
-  padding: 40px 20px;
-  text-align: center;
-  margin: 40px 0;
-  border-radius: 10px;
-}
-
-.concept h2 {
-  font-family: 'Times New Roman';
-  font-size: 2rem;
-  color: #2c3e50;
-  font-weight: bold;
-  margin-bottom: 30px;
-}
-
-.concept-steps {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: stretch;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.step {
-  background-color: #f9f9f9;
-  padding: 20px;
-  flex: 1;
-  max-width: 280px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.step:hover {
-  background-color : #EF9A14;
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-.step-icon {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 20px;
-}
-
-
-.step h3 {
-  font-size: 1.3rem;
-  color: #2c3e50;
-  margin-bottom: 15px;
-  font-weight: bold;
-}
-
-.step p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  header {
-    height: 40vh;
-    padding: 20px 15px;
-  }
-
-  header h1 {
-    font-size: 2rem;
-  }
-
-  header p {
-    font-size: 1rem;
-  }
-
-  .recipe-list {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .concept-steps {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .step {
-    max-width: 90%;
-  }
+/* Animations fluides */
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 </style>
