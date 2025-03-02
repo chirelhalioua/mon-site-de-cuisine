@@ -242,13 +242,20 @@ h2 {
     align-items: center;
   }
 
-  .recipe-detail, .other-recipes {
+  .recipe-detail {
     width: 90%;
   }
 
+  /* Le bloc "Autres recettes" prend toute la largeur */
   .other-recipes {
+    width: 100%;
     margin-top: 20px;
     text-align: center;
+  }
+
+  .other-recipes h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
   }
 }
 </style>
