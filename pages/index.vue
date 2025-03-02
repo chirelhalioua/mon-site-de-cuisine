@@ -1,86 +1,50 @@
 <template>
-  <div class="min-h-screen w-full bg-white font-[Playfair_Display]">
-    <!-- Header -->
-    <header class="relative py-16 px-6 bg-[#EF9A14]">
-      <div class="max-w-[1200px] mx-auto text-center">
-        <p class="text-[0.9rem] font-[Montserrat] text-white mb-2 tracking-[0.2em]">CUISINE MINIMALISTE</p>
-        <h1 class="text-[3.5rem] max-lg:text-[2.5rem] max-sm:text-[2rem] font-bold text-white leading-[1.1] mb-4">5 ingrédients, 100 saveurs</h1>
-        <p class="text-[1.1rem] max-sm:text-[1rem] text-white font-[Montserrat] font-light max-w-[500px] mx-auto">Découvrez des recettes savoureuses et simples avec seulement 5 ingrédients !</p>
+  <div class="homepage">
+    <!-- Section Héro -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Magazine Culinaire Minimaliste</h1>
+        <p>Des recettes simples, 5 ingrédients, une explosion de saveurs.</p>
       </div>
-    </header>
+    </section>
 
-    <!-- Recettes Section -->
-    <section class="px-6 py-12 bg-white">
-      <div class="max-w-[1200px] mx-auto">
-        <h2 class="text-[2.5rem] text-center font-bold text-[#2c3e50] mb-12">Recettes populaires</h2>
-        <div class="grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-6">
-          <div v-for="recipe in recipes" 
-               :key="recipe.id" 
-               class="bg-white border-[1px] border-[#eee]"
-               :style="{ transform: recipe.hover ? 'translateY(-8px)' : 'none' }"
-               @mouseenter="recipe.hover = true"
-               @mouseleave="recipe.hover = false">
-            <img :src="'https://placehold.co/400x300'" class="w-full h-[200px] object-cover" />
-            <div class="p-6">
-              <p class="text-[#EF9A14] font-[Montserrat] text-[0.8rem] tracking-[0.2em] mb-2">RECETTE DU JOUR</p>
-              <h3 class="text-[1.5rem] font-bold text-[#2c3e50] mb-2 leading-tight">{{ recipe.title }}</h3>
-              <p class="text-[#7f8c8d] text-[0.9rem] mb-4 font-[Montserrat]">{{ recipe.description }}</p>
-              <div class="flex items-center justify-between">
-                <NuxtLink 
-                  :to="`/recettes/${recipe.id}`"
-                  class="text-[#2c3e50] font-[Montserrat] text-[0.8rem] tracking-[0.1em] flex items-center group"
-                  :style="{ color: recipe.hover ? '#EF9A14' : '#2c3e50' }">
-                  <span>LIRE LA RECETTE</span>
-                  <svg 
-                    class="w-4 h-4 ml-2 transition-transform duration-300"
-                    :style="{ transform: recipe.hover ? 'translateX(4px)' : 'none' }"
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                  </svg>
-                </NuxtLink>
+    <!-- Section Recettes Récentes -->
+    <section class="recent-articles">
+      <div class="section-content">
+        <h2>Recettes Récentes</h2>
+        <div class="articles-grid">
+          <article v-for="recipe in recipes" :key="recipe.id" class="article">
+            <NuxtLink :to="`/recettes/${recipe.id}`" class="article-link">
+              <div class="image-container">
+                <img :src="recipe.image" :alt="recipe.title" />
               </div>
-            </div>
-          </div>
+              <div class="article-details">
+                <h3>{{ recipe.title }}</h3>
+                <p class="excerpt">{{ recipe.description }}</p>
+                <span class="read-more">Lire la suite</span>
+              </div>
+            </NuxtLink>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Concept Section -->
-    <section class="px-6 py-12 bg-[#f8f8f8]">
-      <div class="max-w-[1200px] mx-auto">
-        <div class="text-center mb-10">
-          <p class="text-[#EF9A14] font-[Montserrat] text-[0.8rem] tracking-[0.2em] mb-2">NOTRE PHILOSOPHIE</p>
-          <h2 class="text-[2.5rem] max-sm:text-[2rem] font-bold text-[#2c3e50]">Le concept</h2>
-        </div>
-        <div class="grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-8">
-          <div v-for="(step, index) in steps" 
-               :key="index"
-               class="bg-white p-6"
-               :style="{ transform: step.hover ? 'translateY(-8px)' : 'none' }"
-               @mouseenter="step.hover = true"
-               @mouseleave="step.hover = false">
-            <div class="text-[#EF9A14] font-[Montserrat] font-bold text-[2rem] mb-4">{{ step.title[0] }}</div>
-            <h3 class="text-[1.2rem] font-bold mb-3">{{ step.title }}</h3>
-            <p class="text-[#666] font-[Montserrat] text-[0.9rem] leading-relaxed">{{ step.description }}</p>
-            <div class="w-8 h-[2px] mt-4 transition-all duration-300"
-                 :style="{ 
-                   backgroundColor: step.hover ? '#EF9A14' : '#2c3e50',
-                   width: step.hover ? '32px' : '16px'
-                 }">
+    <!-- Section Concept -->
+    <section class="concept">
+      <div class="section-content">
+        <h2>Notre Concept</h2>
+        <div class="concept-grid">
+          <div v-for="step in steps" :key="step.title" class="concept-item">
+            <div class="concept-icon">
+              <i :class="['fas', step.icon]"></i>
+              <span class="concept-number">{{ step.number }}</span>
             </div>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-[#2c3e50] text-white py-8 px-6">
-      <div class="max-w-[1200px] mx-auto text-center">
-        <p class="font-[Montserrat] text-[0.8rem] tracking-[0.2em] opacity-80">CUISINEZ SIMPLEMENT</p>
-      </div>
-    </footer>
   </div>
 </template>
 
@@ -88,63 +52,218 @@
 import { ref } from 'vue'
 
 const recipes = ref([
-  {
-    id: 1,
-    title: 'Salade de quinoa',
-    description: 'Une salade fraîche avec du quinoa, des légumes et de l\'huile d\'olive',
-    hover: false
+  { 
+    id: 1, 
+    title: 'Salade de quinoa', 
+    description: 'Une salade fraîche avec du quinoa et des légumes croquants. Une recette simple et légère pour démarrer la journée.', 
+    image: 'https://cdn.pixabay.com/photo/2016/11/13/21/58/quinoa-1822176_1280.jpg' 
   },
-  {
-    id: 2,
-    title: 'Tacos au poulet',
-    description: 'Des tacos épicés avec du poulet grillé, des légumes croquants et une sauce maison',
-    hover: false
-  },
-  {
-    id: 3,
-    title: 'Pasta tomate-basilic',
-    description: 'Des pâtes fraîches avec une sauce tomate simple et du basilic',
-    hover: false
+  { 
+    id: 2, 
+    title: 'Tacos au poulet', 
+    description: 'Des tacos épicés avec du poulet grillé et une sauce maison. Idéal pour un repas convivial et rapide.', 
+    image: 'https://cdn.pixabay.com/photo/2017/12/27/04/28/tortilla-3041938_1280.jpg' 
   }
 ])
 
 const steps = ref([
-  {
-    title: '1. Trouvez vos ingrédients',
-    description: 'Ouvrez votre frigo ou vos placards et choisissez 5 ingrédients disponibles.',
-    hover: false
+  { 
+    number: 1,
+    icon: 'fa-leaf', 
+    title: 'Choisissez vos ingrédients', 
+    description: 'Trouvez 5 ingrédients simples pour créer des recettes savoureuses.' 
   },
-  {
-    title: '2. Suivez nos recettes',
-    description: 'Découvrez nos recettes rapides et faciles, adaptées à vos 5 ingrédients.',
-    hover: false
+  { 
+    number: 2,
+    icon: 'fa-utensils', 
+    title: 'Suivez nos recettes', 
+    description: 'Des recettes claires, rapides et gourmandes adaptées à vos ingrédients.' 
   },
-  {
-    title: '3. Dégustez !',
-    description: 'Préparez des plats délicieux, simples et rapides à partager avec vos proches.',
-    hover: false
+  { 
+    number: 3,
+    icon: 'fa-smile', 
+    title: 'Régalez-vous', 
+    description: 'Savourez des plats délicieux, simples et faits maison.' 
   }
 ])
 </script>
 
 <style>
-/* Import des polices */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
-/* Transitions globales */
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   transition: all 0.3s ease;
 }
 
-/* Style pour les liens */
-a {
-  text-decoration: none;
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: #fff;
 }
 
-/* Animations fluides */
-.transition-transform {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+/* Homepage */
+.homepage {
+  width: 100%;
+}
+
+/* Section Héro */
+.hero {
+  background-color: #EF9A14;
+  padding: 6rem 2rem;
+  text-align: center;
+  color: white;
+}
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 1.1;
+}
+.hero p {
+  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 1rem;
+}
+
+/* Section Recettes Récentes */
+.recent-articles {
+  padding: 4rem 2rem;
+  background-color: white;
+}
+.section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.recent-articles h2 {
+  font-size: 2.5rem;
+  color: #000000;
+  margin-bottom: 3rem;
+}
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.article {
+  cursor: pointer;
+  text-align: left;
+}
+.article-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.image-container {
+  overflow: hidden;
+  border-radius: 1.5rem;
+}
+.image-container img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.article-link:hover .image-container img {
+  transform: scale(1.05);
+}
+.article-details {
+  padding: 1rem 0;
+}
+.article h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000000;
+  margin: 0.5rem 0;
+}
+.excerpt {
+  font-size: 1rem;
+  color: #000000;
+  margin: 0.5rem 0;
+}
+.read-more {
+  font-size: 0.9rem;
+  color: #EF9A14;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+/* Section Concept - Design Moderne */
+.concept {
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #f0f0f0, #ffffff);
+}
+.concept h2 {
+  font-size: 2.8rem;
+  color: #000000;
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+}
+.concept h2::after {
+  content: '';
+  display: block;
+  width: 50%;
+  height: 4px;
+  background: #EF9A14;
+  margin: 0.5rem auto 0;
+}
+.concept-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.concept-item {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  flex: 1 1 300px;
+  max-width: 300px;
+  text-align: center;
+}
+.concept-item:hover {
+  transform: translateY(-5px);
+}
+.concept-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #EF9A14;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin: 0 auto 1rem;
+}
+.concept-icon i {
+  font-size: 1.5rem;
+}
+.concept-number {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 0.2rem;
+}
+.concept-item h3 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+.concept-item p {
+  font-size: 1rem;
+  color: #000000;
+  line-height: 1.5;
 }
 </style>

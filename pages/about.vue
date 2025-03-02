@@ -22,95 +22,110 @@ const team = [
 </script>
 
 <style scoped>
+/* Importation de la police Playfair Display */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
 /* Style général de la page */
+
 /* En-tête */
 header {
-  background: #f39c12;
-  color: white;
-  padding: 40px 20px;
+  background: #EB881D;  /* Couleur de fond plus douce */
+  color: #ffffff;  /* Texte sombre pour un contraste élevé */
+  padding: 50px 20px;
   text-align: center;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-  font-family: 'Times New Roman';
-  font-size: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;  /* Taille de texte plus grande pour un impact plus fort */
+  font-weight: 700;
   margin: 0;
 }
 
 header p {
-  font-family: 'Times New Roman';
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
-  margin-top: 10px;
-  color: #ecf0f1;
+  margin-top: 15px;
+  color: #ffffff;  /* Texte noir pour une lisibilité maximale */
+  line-height: 1.6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Section des membres de l'équipe */
 .team {
-  margin-top: 3rem;
+  margin-top: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 30px;
 }
 
 .team h2 {
-  font-family: 'Times New Roman';
-  font-size: 2rem;
-  color: #2c3e50;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: #000000;
   font-weight: 600;
   margin-bottom: 2rem;
   width: 100%;
-  text-align:center;
+  text-align: center;
 }
 
+/* Membres de l'équipe */
 .team-member {
   width: 300px;
-  background-color: rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 10px 0;
-  border-radius: 8px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom:30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  margin-bottom: 30px;
+  overflow: hidden;
 }
 
 .team-member:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  background-color: #f7f7f7;  /* Légère couleur de survol pour un effet subtil */
 }
 
 .team-member h3 {
-  font-size: 1.5rem;
-  color: #34495e;
-  margin-bottom: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #000000;
+  margin-bottom: 15px;
 }
 
 .team-member p {
   font-size: 1.1rem;
-  color: #7f8c8d;
+  color: #000000;  /* Texte noir pour un meilleur contraste */
   font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .about {
-    padding: 20px;
+    padding: 0px;
   }
 
-  h1 {
-    font-size: 2rem;
+  header h1 {
+    font-size: 2.4rem;
   }
 
   .team h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 
   .team-member {
-    padding: 15px;
+    padding: 20px;
+    width: 80%;
   }
 }
 </style>

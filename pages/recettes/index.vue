@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <header>
+    <header class="home-header">
       <h1>Nos Recettes en 5 Ingrédients</h1>
       <p>Découvrez des recettes simples et savoureuses avec seulement 5 ingrédients.</p>
     </header>
@@ -10,11 +10,16 @@
       <div class="recipe-list">
         <div v-for="recipe in recipes" :key="recipe.id" class="recipe-item">
           <NuxtLink :to="`/recettes/${recipe.id}`" class="recipe-link">
-            <h3>{{ recipe.title }}</h3>
-            <p>{{ recipe.description }}</p>
-            <ul class="ingredients-list">
-              <li v-for="ingredient in recipe.ingredients" :key="ingredient">{{ ingredient }}</li>
-            </ul>
+            <div class="recipe-card">
+              <h3>{{ recipe.title }}</h3>
+              <p class="recipe-description">{{ recipe.description }}</p>
+              <ul class="ingredients-list">
+                <li v-for="ingredient in recipe.ingredients" :key="ingredient">
+                  <i class="fas fa-check"></i>
+                  <span>{{ ingredient }}</span>
+                </li>
+              </ul>
+            </div>
           </NuxtLink>
         </div>
       </div>
@@ -49,58 +54,59 @@ const recipes = [
 </script>
 
 <style scoped>
-/* Style général de la page */
-/* Style général de la page */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
 .home {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f9;
   color: #333;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh; /* S'assurer que la page occupe toute la hauteur de l'écran */
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 2rem;
 }
 
-/* En-tête */
-header {
-  background: #f39c12;
+/* Header */
+.home-header {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
   color: white;
   padding: 40px 20px;
   text-align: center;
   margin-bottom: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-header h1 {
-  font-family: 'Times New Roman';
+.home-header h1 {
+  font-family: 'Times New Roman', serif;
   font-size: 2.5rem;
   margin: 0;
 }
-
-header p {
-  font-family: 'Times New Roman';
+.home-header p {
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
-  font-weight: 400;
   margin-top: 10px;
   color: #ecf0f1;
 }
 
-/* Section des recettes populaires */
+/* Featured Recipes */
 .featured-recipes {
   text-align: center;
   margin-bottom: 50px;
 }
-
 .featured-recipes h2 {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', serif;
   font-size: 2rem;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 20px;
   font-weight: 600;
 }
 
-/* Liste des recettes */
+/* Recipe List */
 .recipe-list {
   display: flex;
   justify-content: space-evenly;
@@ -108,80 +114,81 @@ header p {
   flex-wrap: wrap;
   padding: 0 10px;
 }
-
 .recipe-item {
-  background-color: white;
-  padding: 20px;
   width: 280px;
   margin: 10px 0;
   border-radius: 10px;
+  background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
 }
-
 .recipe-item:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
-
-.recipe-item h3 {
+.recipe-link {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 20px;
+}
+.recipe-card h3 {
+  font-family: 'Times New Roman', serif;
   font-size: 1.4rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 15px;
 }
 
-.recipe-item p {
+.recipe-description {
+  font-family: 'Times New Roman', serif;
   font-size: 1rem;
-  color: #7f8c8d;
+  color: #000000;
   margin-bottom: 20px;
 }
 
-.recipe-link {
-  color: #000;
-  font-weight: bold;
-  text-decoration: none;
+/* Ingredients List */
+.ingredients-list {
+  font-family: 'Times New Roman', serif;
+  list-style: none;
+  padding: 0;
+}
+.ingredients-list li {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #000000;
+  margin-bottom: 8px;
+}
+.ingredients-list li i {
+  color: #27ae60;
+  margin-right: 8px;
 }
 
-.recipe-link:hover {
-  text-decoration: none;
-}
-
-/* Styles pour mobile */
+/* Responsive */
 @media (max-width: 768px) {
-  header {
+  .home-header {
     padding: 30px 15px;
   }
-
-  header h1 {
-    font-size: 2rem; /* Réduction de la taille du titre sur petits écrans */
+  .home-header h1 {
+    font-size: 2rem;
   }
-
-  header p {
-    font-size: 1rem; /* Réduction de la taille du texte sous-titre */
+  .home-header p {
+    font-size: 1rem;
   }
-
-  .featured-recipes h2 {
-    font-size: 1.5rem;
-  }
-
   .recipe-list {
     flex-direction: column;
     align-items: center;
   }
-
   .recipe-item {
-    width: 90%; /* Les items de la recette prennent 90% de la largeur de l'écran */
-    margin: 20px 0; /* Ajouter un peu d'espace entre les recettes */
+    width: 90%;
+    margin: 20px 0;
   }
-
-  .recipe-item h3 {
-    font-size: 1.2rem; /* Réduction de la taille du titre dans les items */
+  .recipe-card h3 {
+    font-size: 1.2rem;
   }
-
-  .recipe-item p {
-    font-size: 0.9rem; /* Réduction de la taille de la description */
+  .recipe-description {
+    font-size: 0.9rem;
   }
 }
 </style>
