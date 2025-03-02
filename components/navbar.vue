@@ -98,6 +98,8 @@ onBeforeUnmount(() => {
   list-style: none;
   display: flex;
   gap: 20px;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-link {
@@ -105,10 +107,13 @@ onBeforeUnmount(() => {
   color: white;
   font-size: 1.2rem;
   transition: color 0.3s ease;
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 
 .nav-link:hover {
   color: #2c3e50;
+  background-color: #ffffff20; /* Un effet léger sur fond */
 }
 
 /* Menu Hamburger */
@@ -156,17 +161,24 @@ onBeforeUnmount(() => {
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
-    display: none;
-    transition: display 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
   }
 
   .nav-links.active {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   .nav-link {
     padding: 15px 0;
     font-size: 1.4rem;
+    text-align: center;
+    width: 100%;
   }
 }
 </style>
