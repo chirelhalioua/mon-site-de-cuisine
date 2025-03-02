@@ -59,7 +59,7 @@ const handleSearch = () => {
 
 <style>
 .navbar {
-  background: #e67e22;
+  background: ##2C3E50;
   padding: 15px 20px;
   position: fixed;
   width: 100%;
