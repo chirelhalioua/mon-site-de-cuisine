@@ -1,269 +1,213 @@
 <template>
-  <div class="homepage">
-    <!-- Section Héro -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Magazine Culinaire Minimaliste</h1>
-        <p>Des recettes simples, 5 ingrédients, une explosion de saveurs.</p>
-      </div>
-    </section>
+  <nav class="navbar">
+    <div class="container">
+      <!-- Titre -->
+      <NuxtLink to="/" class="brand">
+        Recettes en 5 ingrédients
+      </NuxtLink>
 
-    <!-- Section Recettes Récentes -->
-    <section class="recent-articles">
-      <div class="section-content">
-        <h2>Recettes Récentes</h2>
-        <div class="articles-grid">
-          <article v-for="recipe in recipes" :key="recipe.id" class="article">
-            <NuxtLink :to="`/recettes/${recipe.id}`" class="article-link">
-              <div class="image-container">
-                <img :src="recipe.image" :alt="recipe.title" />
-              </div>
-              <div class="article-details">
-                <h3>{{ recipe.title }}</h3>
-                <p class="excerpt">{{ recipe.description }}</p>
-                <span class="read-more">Lire la suite</span>
-              </div>
-            </NuxtLink>
-          </article>
-        </div>
+      <!-- Barre de recherche -->
+      <div class="search-box">
+        <input 
+          type="text" 
+          v-model="searchQuery" 
+          placeholder="Rechercher une recette..."
+          @input="handleSearch"
+        >
       </div>
-    </section>
 
-    <!-- Section Concept -->
-    <section class="concept">
-      <div class="section-content">
-        <h2>Notre Concept</h2>
-        <div class="concept-grid">
-          <div v-for="step in steps" :key="step.title" class="concept-item">
-            <div class="concept-icon">
-              <i :class="['fas', step.icon]"></i>
-              <span class="concept-number">{{ step.number }}</span>
-            </div>
-            <h3>{{ step.title }}</h3>
-            <p>{{ step.description }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+      <!-- Menu Hamburger -->
+      <button class="hamburger" @click="toggleMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Navigation -->
+      <ul class="nav-links" :class="{ 'active': isMenuOpen }">
+        <li>
+          <NuxtLink to="/" @click="closeMenu">Accueil</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/recettes" @click="closeMenu">Recettes</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/about" @click="closeMenu">À propos</NuxtLink>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-const recipes = ref([
-  { 
-    id: 1, 
-    title: 'Salade de quinoa', 
-    description: 'Une salade fraîche avec du quinoa et des légumes croquants. Une recette simple et légère pour démarrer la journée.', 
-    image: 'https://cdn.pixabay.com/photo/2016/11/13/21/58/quinoa-1822176_1280.jpg' 
-  },
-  { 
-    id: 2, 
-    title: 'Tacos au poulet', 
-    description: 'Des tacos épicés avec du poulet grillé et une sauce maison. Idéal pour un repas convivial et rapide.', 
-    image: 'https://cdn.pixabay.com/photo/2017/12/27/04/28/tortilla-3041938_1280.jpg' 
-  }
-])
+// États
+const searchQuery = ref<string>('')
+const isMenuOpen = ref<boolean>(false)
 
-const steps = ref([
-  { 
-    number: 1,
-    icon: 'fa-leaf', 
-    title: 'Choisissez vos ingrédients', 
-    description: 'Trouvez 5 ingrédients simples pour créer des recettes savoureuses.' 
-  },
-  { 
-    number: 2,
-    icon: 'fa-utensils', 
-    title: 'Suivez nos recettes', 
-    description: 'Des recettes claires, rapides et gourmandes adaptées à vos ingrédients.' 
-  },
-  { 
-    number: 3,
-    icon: 'fa-smile', 
-    title: 'Régalez-vous', 
-    description: 'Savourez des plats délicieux, simples et faits maison.' 
-  }
-])
+// Méthodes
+const toggleMenu = (): void => {
+  isMenuOpen.value = !isMenuOpen.value
+}
+
+const closeMenu = (): void => {
+  isMenuOpen.value = false
+}
+
+const handleSearch = (): void => {
+  // Logique de recherche ici
+  console.log('Recherche:', searchQuery.value)
+}
+
+// Optionnel: Fermer le menu lors du changement de route
+watch(() => route.fullPath, () => {
+  closeMenu()
+})
+
+// Optionnel: Fermer le menu lors du clic en dehors
+onMounted(() => {
+  document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement
+    if (!target.closest('.navbar')) {
+      closeMenu()
+    }
+  })
+})
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transition: all 0.3s ease;
-}
-
-body {
-  font-family: 'Playfair Display', serif;
-  background-color: #fff;
-}
-
-/* Homepage */
-.homepage {
+<style scoped>
+.navbar {
+  background: #e67e22;
+  padding: 15px 20px;
+  position: fixed;
   width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
-/* Section Héro */
-.hero {
-  background-color: #EF9A14;
-  padding: 6rem 2rem;
-  text-align: center;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
   color: white;
-}
-.hero-content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.hero h1 {
-  font-size: 4rem;
-  font-weight: bold;
-  line-height: 1.1;
-}
-.hero p {
-  font-size: 1.2rem;
-  font-family: 'Montserrat', sans-serif;
-  margin-top: 1rem;
-}
-
-/* Section Recettes Récentes */
-.recent-articles {
-  padding: 4rem 2rem;
-  background-color: white;
-}
-.section-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
-.recent-articles h2 {
-  font-size: 2.5rem;
-  color: #000000;
-  margin-bottom: 3rem;
-}
-.articles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-.article {
-  cursor: pointer;
-  text-align: left;
-}
-.article-link {
   text-decoration: none;
-  color: inherit;
-  display: block;
-}
-.image-container {
-  overflow: hidden;
-  border-radius: 1.5rem;
-}
-.image-container img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-.article-link:hover .image-container img {
-  transform: scale(1.05);
-}
-.article-details {
-  padding: 1rem 0;
-}
-.article h3 {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #000000;
-  margin: 0.5rem 0;
-}
-.excerpt {
-  font-size: 1rem;
-  color: #000000;
-  margin: 0.5rem 0;
-}
-.read-more {
-  font-size: 0.9rem;
-  color: #EF9A14;
-  font-weight: bold;
-  text-decoration: underline;
-  margin-top: 0.5rem;
-  display: inline-block;
 }
 
-/* Section Concept - Design Moderne */
-.concept {
-  padding: 6rem 2rem;
-  background: linear-gradient(135deg, #f0f0f0, #ffffff);
+.search-box {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 20px;
 }
-.concept h2 {
-  font-size: 2.8rem;
-  color: #000000;
-  margin-bottom: 3rem;
-  position: relative;
-  display: inline-block;
-}
-.concept h2::after {
-  content: '';
-  display: block;
-  width: 50%;
-  height: 4px;
-  background: #EF9A14;
-  margin: 0.5rem auto 0;
-}
-.concept-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-.concept-item {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  flex: 1 1 300px;
-  max-width: 300px;
-  text-align: center;
-}
-.concept-item:hover {
-  transform: translateY(-5px);
-}
-.concept-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background-color: #EF9A14;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+.search-box input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  background: rgba(255,255,255,0.2);
   color: white;
-  margin: 0 auto 1rem;
+  outline: none;
 }
-.concept-icon i {
-  font-size: 1.5rem;
+
+.search-box input::placeholder {
+  color: rgba(255,255,255,0.7);
 }
-.concept-number {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-top: 0.2rem;
+
+.search-box input:focus {
+  background: rgba(255,255,255,0.3);
 }
-.concept-item h3 {
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #000000;
-  margin-bottom: 1rem;
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
 }
-.concept-item p {
-  font-size: 1rem;
-  color: #000000;
-  line-height: 1.5;
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.nav-links a:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.nav-links a.router-link-active {
+  background: rgba(255,255,255,0.2);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  .search-box {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: #e67e22;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
 }
 </style>
